@@ -4,4 +4,4 @@ node_modules/
 .env.*
 .npmrc
 publish.ps1
-verify.mjs
+/verify.mjs

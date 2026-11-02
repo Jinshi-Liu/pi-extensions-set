@@ -1,22 +1,24 @@
 {
-  "name": "pi-minimal-extensions",
-  "version": "0.1.0",
+  "name": "pi-extensions-set",
+  "version": "0.2.0",
   "private": true,
-  "description": "Plan Mode and Subagent implementations based on the official Pi examples.",
+  "description": "A Pi extension collection: Codex usage status, Plan Mode, Questionnaire, and background Subagents.",
   "license": "MIT",
   "type": "module",
-  "keywords": [
-    "pi-package",
-    "pi-extension"
-  ],
+  "keywords": ["pi-package", "pi-extension"],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Jinshi-Liu/pi-minimal-extensions.git"
+    "url": "git+https://github.com/Jinshi-Liu/pi-extensions-set.git"
+  },
+  "scripts": {
+    "test": "node extensions/plan-mode/todos-test.mjs && node extensions/plan-mode/workflow-test.mjs && node extensions/subagent/models-test.mjs && node extensions/subagent/tests/verify.mjs"
   },
   "pi": {
     "extensions": [
-      "./pi-minimal-plan/index.ts",
-      "./pi-minimal-subagent/index.ts"
+      "./extensions/codex-usage-status.ts",
+      "./extensions/plan-mode/index.ts",
+      "./extensions/questionnaire.ts",
+      "./extensions/subagent/index.ts"
     ]
   },
   "peerDependencies": {
