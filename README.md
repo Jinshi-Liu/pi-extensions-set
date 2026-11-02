@@ -1,12 +1,13 @@
 # Pi Extensions Set
 
-个人维护的 [Pi](https://github.com/earendil-works/pi) 扩展集，基于 Pi 1.4.0 使用和验证。原仓库名为 `pi-minimal-extensions`，现统一整理为四个扩展。
+个人维护的 [Pi](https://github.com/earendil-works/pi) 扩展集，基于 Pi 1.4.0 使用和验证。原仓库名为 `pi-minimal-extensions`，现统一整理为五个扩展。
 
 ## 扩展
 
 | 扩展 | 功能 | 入口 |
 | --- | --- | --- |
 | [Codex Usage Status](extensions/codex-usage-status.ts) | 在状态栏显示 Codex 5 小时、每周剩余额度及重置时间 | `/codex-usage` |
+| [Memory](extensions/memory/README.md) | 显式开关全局记忆索引上下文，正文按需读取 | `/memory` |
 | [Plan Mode](extensions/plan-mode/README.md) | 讨论 → 编写计划 → 讨论 → 执行，支持任务进度和中途调整 | `/plan`、`/todos` |
 | [Questionnaire](extensions/questionnaire.ts) | 单问题选项、多问题分页及自定义回答 | 模型调用 `questionnaire` 工具 |
 | [Subagent](extensions/subagent/README.md) | 后台持久子代理、完成通知、四档模型配置 | `/subagent`、`/subagent-model` |
@@ -17,7 +18,7 @@
 pi install git:github.com/Jinshi-Liu/pi-extensions-set
 ```
 
-安装后输入 `/reload`。Pi 提供运行依赖，无需分别安装四个扩展。
+安装后输入 `/reload`。Pi 提供运行依赖，无需分别安装五个扩展。
 
 如果已安装旧仓库，先移除旧来源，再安装新来源：
 
@@ -44,6 +45,12 @@ pi update git:github.com/Jinshi-Liu/pi-extensions-set
 
 显示的是**剩余额度**，不是本次会话的 token 统计。通过现有 OAuth 登录信息访问 ChatGPT 用量接口；该接口变化或不可用时可能无法显示数据。仓库不包含账号、凭据或个人配置。
 
+### Memory
+
+`/memory` 切换记忆上下文，默认关闭；新建、恢复会话和重载后均重置为关闭。开启时注入 `~/.pi/agent/memory/index.md` 的最新正文，具体记忆文件按需读取；关闭时不注入记忆提示。
+
+单一全局目录、Markdown 文件平铺存放，不创建子目录。维护规则随扩展分发，索引和实际资料不上传、不随包更新覆盖。没有新增工具、自动提取或数据库，也不提供文件访问隔离。首次使用需自行或明确让 agent 创建记忆目录及索引。详见 [Memory 的设计与使用说明](extensions/memory/README.md)。
+
 ### 规划与问答
 
 1. `/plan`：进入讨论，配合 Questionnaire 澄清目标。
@@ -69,6 +76,7 @@ Questionnaire 由模型按需调用，支持选项和自由输入，需要交互
 ```text
 extensions/
 ├── codex-usage-status.ts
+├── memory/                # 实现、维护规则、设计说明和回归测试
 ├── plan-mode/             # 实现、使用说明和回归测试
 ├── questionnaire.ts
 └── subagent/              # 实现、使用说明和回归测试
@@ -89,7 +97,7 @@ $env:PI_TEST_INSTALL = 'C:/path/to/pi/node_modules'
 npm test
 ```
 
-测试覆盖 Plan Mode 的工作流、任务面板，以及 Subagent 的模型选择、后台通知、持久会话和取消流程；默认使用模拟子进程，不调用真实模型、不消耗模型额度。Codex 用量接口和 Questionnaire 交互需在登录后的 TUI 中手动验证。
+测试覆盖 Memory 的开关、索引注入及生命周期，Plan Mode 的工作流、任务面板，以及 Subagent 的模型选择、后台通知、持久会话和取消流程；默认使用模拟子进程，不调用真实模型、不消耗模型额度。Codex 用量接口和 Questionnaire 交互需在登录后的 TUI 中手动验证。
 
 ## 许可与来源
 

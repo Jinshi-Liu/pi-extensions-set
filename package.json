@@ -1,8 +1,8 @@
 {
   "name": "pi-extensions-set",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
-  "description": "A Pi extension collection: Codex usage status, Plan Mode, Questionnaire, and background Subagents.",
+  "description": "A Pi extension collection: Codex usage status, Memory, Plan Mode, Questionnaire, and background Subagents.",
   "license": "MIT",
   "type": "module",
   "keywords": ["pi-package", "pi-extension"],
@@ -11,11 +11,12 @@
     "url": "git+https://github.com/Jinshi-Liu/pi-extensions-set.git"
   },
   "scripts": {
-    "test": "node extensions/plan-mode/todos-test.mjs && node extensions/plan-mode/workflow-test.mjs && node extensions/subagent/models-test.mjs && node extensions/subagent/tests/verify.mjs"
+    "test": "node extensions/memory/memory-test.mjs && node extensions/plan-mode/todos-test.mjs && node extensions/plan-mode/workflow-test.mjs && node extensions/subagent/models-test.mjs && node extensions/subagent/tests/verify.mjs"
   },
   "pi": {
     "extensions": [
       "./extensions/codex-usage-status.ts",
+      "./extensions/memory/index.ts",
       "./extensions/plan-mode/index.ts",
       "./extensions/questionnaire.ts",
       "./extensions/subagent/index.ts"
