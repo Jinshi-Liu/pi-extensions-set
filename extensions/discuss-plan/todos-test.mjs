@@ -3,7 +3,7 @@ import { homedir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
-const install = process.env.PI_TEST_INSTALL ?? join(homedir(), ".pi/agent/install/releases/1.4.0/node_modules");
+const install = process.env.PI_TEST_INSTALL ?? join(homedir(), ".pi/agent/install/releases/1.5.0/node_modules");
 const { createJiti } = await import(pathToFileURL(join(install, "jiti/lib/jiti.mjs")));
 const tui = await import(pathToFileURL(join(install, "@earendil-works/pi-tui/dist/index.js")));
 const jiti = createJiti(import.meta.url, {

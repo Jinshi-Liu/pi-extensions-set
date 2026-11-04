@@ -5,7 +5,7 @@ import { homedir } from "node:os";
 import { dirname, join } from "node:path";
 import { pathToFileURL } from "node:url";
 
-const install = process.env.PI_TEST_INSTALL ?? join(homedir(), ".pi/agent/install/releases/1.4.0/node_modules");
+const install = process.env.PI_TEST_INSTALL ?? join(homedir(), ".pi/agent/install/releases/1.5.0/node_modules");
 const { getSupportedThinkingLevels } = await import(pathToFileURL(`${install}/@earendil-works/pi-ai/dist/models.js`));
 const tui = await import(pathToFileURL(`${install}/@earendil-works/pi-tui/dist/index.js`));
 function compile(file, exports, dependencies) {
